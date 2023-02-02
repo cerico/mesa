@@ -10,10 +10,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'cat package.json'
         run: cat ./package.json
-      - uses: hmarr/debug-action@v2
       - name: 'Automated Version Bump'
         id: version-bump
-        uses: ./action
+        uses:  'phips28/gh-action-bump-version@master'
         with:
           tag-prefix: 'v'
         env:

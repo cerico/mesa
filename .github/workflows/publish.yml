@@ -13,7 +13,7 @@ jobs:
       - uses: hmarr/debug-action@v2
       - name: 'Automated Version Bump'
         id: version-bump
-        uses: 'phips28/gh-action-bump-version@master'
+        uses: ./action
         with:
           tag-prefix: 'v'
         env:

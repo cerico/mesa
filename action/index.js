@@ -224,8 +224,7 @@ const pkg = getPackageJson();
     }
 
     const remoteRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`;
-    console.log(process.env)
-    console.log(remoteRepo)
+    console.log(process.env.GITHUB_TOKEN)
     if (process.env['INPUT_SKIP-TAG'] !== 'true') {
       await runInWorkspace('git', ['tag', newVersion]);
       if (process.env['INPUT_SKIP-PUSH'] !== 'true') {

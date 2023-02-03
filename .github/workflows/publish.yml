@@ -29,7 +29,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: echo "FOO=`git log | head -5 | tail -1`" >> $GITHUB_ENV
+        run: echo "FOO=`git log | head -11 | tail -1`" >> $GITHUB_ENV
       - name: Test
         run: echo $FOO > idk.txt
 

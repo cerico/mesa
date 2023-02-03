@@ -31,24 +31,13 @@ jobs:
       - name: Set FOO
         run: git log --merges -1 | grep commit | awk -F' ' '{print $2}' >> idk.txt
 
-      - uses: actions/github-script@v5
-        id: get-comment
-        with:
-          script: |
-            return (await github.rest.issues.getComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              comment_id: ${{ steps.my-step.outputs.comment-id }}
-            })).data.body;
-          result-encoding: string
-
-      - run: echo "${{ steps.get-comment.outputs.result }}"
+      - run: echo "${{ github.event.pull_request.body }}"
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          body: ${{ steps.get-comment.outputs.result }}
+          body: ${{ github.event.pull_request.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

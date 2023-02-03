@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.release.target_commitish }}
+        fetch-depth: 0
 
       - name: 'cat package.json'
         run: cat ./package.json
@@ -28,7 +29,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: echo "FOO=`ls|head -1`">> $GITHUB_ENV
+        run: echo "FOO=`git log | head -5 | tail -1`" >> $GITHUB_ENV
       - name: Test
         run: echo $FOO > idk.txt
 

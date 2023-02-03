@@ -27,13 +27,6 @@ jobs:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
 
-      - name: Changelog
-        uses: scottbrenner/generate-changelog-action@master
-        id: Changelog
-        env:
-          REPO: ${{ github.repository }}
-
-
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'

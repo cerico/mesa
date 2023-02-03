@@ -28,9 +28,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: echo "FOO=`git log -3 --pretty=format:%s`" >> $GITHUB_ENV
-      - name: Test
-        run: echo $FOO > idk.txt
+        run: git log -3 --pretty=format:%s` >> idk.txt
 
       - name: output last merges
         run: |

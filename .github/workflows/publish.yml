@@ -28,7 +28,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: git log -3 --pretty=format:%s >> idk.txt
+        run: git log --pretty=format:%s >> idk.txt
 
       - name: Create release
         uses: ncipollo/release-action@v1

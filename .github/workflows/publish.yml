@@ -36,7 +36,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          body: echo $FOO
+          body: ${{ steps.version-bump.outputs.newTag }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

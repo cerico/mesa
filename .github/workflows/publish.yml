@@ -35,9 +35,11 @@ jobs:
         id: get-comment
         with:
           script: |
-            return github.rest.issues.getComment({
-              comment_id: 'b73e7f26f8aba283585796a0d160f901d7fb3f41'
-            }).body
+            return (await github.rest.issues.getComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: ${{ steps.my-step.outputs.comment-id }}
+            })).data.body;
           result-encoding: string
 
       - run: echo "${{ steps.get-comment.outputs.result }}"

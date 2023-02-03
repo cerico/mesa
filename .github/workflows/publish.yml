@@ -36,7 +36,7 @@ jobs:
         with:
           script: |
             return github.rest.issues.getComment({
-              comment_id: b73e7f26f8aba283585796a0d160f901d7fb3f41
+              comment_id: 'b73e7f26f8aba283585796a0d160f901d7fb3f41'
             }).body
           result-encoding: string
 

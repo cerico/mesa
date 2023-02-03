@@ -28,7 +28,7 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: echo "FOO=`git log --merges -1 | tail -n+8` >> $GITHUB_ENV
+        run: echo "FOO=`git log --merges -1 | tail -n+8`" >> $GITHUB_ENV
       - name: Test
         run: echo $FOO > idk.txt
 

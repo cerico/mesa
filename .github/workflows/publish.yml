@@ -11,18 +11,6 @@ jobs:
         with:
           ref: ${{ github.event.release.target_commitish }}
 
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
-        with:
-          latest-version: ${{ github.event.release.tag_name }}
-          release-notes: ${{ github.event.release.body }}
-
-      - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: ${{ github.event.release.target_commitish }}
-          commit_message: Update CHANGELOG
-          file_pattern: CHANGELOG.md
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Automated Version Bump'
@@ -38,6 +26,12 @@ jobs:
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
+
+      - name: Changelog
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
 
 
       - uses: actions/setup-node@v3

@@ -29,13 +29,24 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
       - name: Set FOO
-        run: git log --pretty=format:%s >> idk.txt
+        run: git log --merges -1 | grep commit | awk -F' ' '{print $2}' >> idk.txt
+
+      - uses: actions/github-script@v5
+        id: get-comment
+        with:
+          script: |
+            return github.rest.issues.getComment({
+              comment_id: b73e7f26f8aba283585796a0d160f901d7fb3f41
+            }).body
+          result-encoding: string
+
+      - run: echo "${{ steps.get-comment.outputs.result }}"
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          bodyFile: idk.txt
+          body: ${{ steps.get-comment.outputs.result }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

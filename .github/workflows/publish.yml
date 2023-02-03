@@ -26,11 +26,17 @@ jobs:
         env:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
+
+      - name: 'yes mate'
+        run: echo "the dogs are barking again"
+      - name: Test
+        run: echo $FOO
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          body: git log | head -5 | tail -1
+          body: $FOO
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

@@ -33,6 +33,10 @@ jobs:
       - name: Test
         run: echo $FOO > idk.txt
 
+      - name: output last merges
+        run: |
+          echo "why ay the dogs: ${{ env.FOO }}"
+
       - name: Create release
         uses: ncipollo/release-action@v1
         with:

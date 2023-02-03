@@ -28,16 +28,15 @@ jobs:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
 
-      - name: Set FOO
-        run: git log --merges -1 | grep commit | awk -F' ' '{print $2}' >> idk.txt
+      - name: Set release text
+        run: git show `git log -2 | grep commit |tail -1 | awk -F' ' '{print $2}'` >> release.txt
 
-      - run: echo "${{ github.event.pull_request.body }}"
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          body: ${{ github.event.pull_request.body }}
+          bodyFile: release.txt
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

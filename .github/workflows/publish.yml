@@ -27,8 +27,8 @@ jobs:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
 
-      - name: 'yes mate'
-        run: echo "the dogs are barking again"
+      - name: Set FOO
+        run: echo "FOO=${{ github.event.inputs.foo }}" >> $GITHUB_ENV
       - name: Test
         run: echo $FOO
 

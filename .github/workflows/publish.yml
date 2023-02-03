@@ -30,13 +30,13 @@ jobs:
       - name: Set FOO
         run: echo "FOO=hello" >> $GITHUB_ENV
       - name: Test
-        run: echo $FOO
+        run: echo $FOO > idk.txt
 
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          body: ${{ FOO }}
+          bodyFilr: idk.txt
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

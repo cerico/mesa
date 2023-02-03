@@ -30,7 +30,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version-bump.outputs.newTag }}
-          bodyFile: './release_notes.txt'
+          bodyFile: './dogs'
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v3

@@ -6,7 +6,8 @@ npm:
 	gh secret set NPM_TOKEN < npm
 	rm npm
 pr:
-	git reset main
+	git rebase origin/main
+	git reset origin/main
 	git add .
 	git commit -F COMMIT.md
 	git push -f

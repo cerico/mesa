@@ -9,8 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: main
-          fetch-depth: 0
+           ref: ${{ github.event.release.target_commitish }}
+           fetch-depth: 0
 
       - name: 'cat package.json'
         run: cat ./package.json

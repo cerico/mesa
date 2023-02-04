@@ -9,6 +9,7 @@ pr:
 	git reset main
 	git add .
 	git commit -F COMMIT.md
+	git push -f
 	gh pr create --fill
 	echo > COMMIT.md
 gh:

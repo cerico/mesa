@@ -14,7 +14,9 @@ minor:
 	echo feat: title > $(COMMIT_FILE)
 	code $(COMMIT_FILE)
 major:
-	echo BREAKING_CHANGE: title > $(COMMIT_FILE)
+	echo feat: title > $(COMMIT_FILE)
+	echo description >> $(COMMIT_FILE)
+	echo BREAKING_CHANGE >> $(COMMIT_FILE)
 	code $(COMMIT_FILE)
 
 ifneq ("$(wildcard $(COMMIT_FILE))","")

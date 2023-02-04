@@ -1,1 +1,9 @@
-test repo for automatic version patching when publishing to npm
+# Cityguessr
+
+Astro application boostrapped with Venlo
+
+# Get started
+
+```
+make start
+```

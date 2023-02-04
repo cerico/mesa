@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-           ref: ${{ github.event.release.target_commitish }}
-           fetch-depth: 0
+           ref: main
 
       - name: 'cat package.json'
         run: cat ./package.json
@@ -30,17 +29,6 @@ jobs:
           NEW_TAG: ${{ steps.version-bump.outputs.newTag }}
         run: echo "new tag $NEW_TAG"
 
-      - name: Set release text
-        run: git show -s --format=%B `git log -2 | grep commit |tail -1 | awk -F' ' '{print $2}'` >> release.txt
-
-
-      - name: Create release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ steps.version-bump.outputs.newTag }}
-          bodyFile: release.txt
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
@@ -49,4 +37,19 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.target_commitish }}
+          fetch-depth: 0
+
+      - name: Set release text
+        run: git show -s --format=%B `git log -2 | grep commit |tail -1 | awk -F' ' '{print $2}'` >> release.txt
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.version-bump.outputs.newTag }}
+          bodyFile: release.txt
+          token: ${{ secrets.GITHUB_TOKEN }}
  

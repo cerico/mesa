@@ -8,9 +8,9 @@ npm:
 pr:
 	git reset main
 	git add .
-	git commit -F commit
+	git commit -F COMMIT.md
 	gh pr create --fill
-	echo > commit
+	echo > COMMIT.md
 gh:
 	gh secret set GH_TOKEN < ~/.ssh/kawajevo/deploy_rsa
 push:

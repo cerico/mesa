@@ -44,7 +44,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set release text
-        run: git show -s --format=%B `git log -2 | grep commit |tail -1 | awk -F' ' '{print $2}'` >> release.txt
+        run: git show -s --format=%B  > release.txt
 
       - name: Create release
         uses: ncipollo/release-action@v1

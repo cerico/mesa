@@ -3,6 +3,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+concurrency:
+  groups: tag-and-release
 jobs:
   publish:
     runs-on: ubuntu-latest
